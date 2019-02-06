@@ -11,6 +11,7 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Numlock)) {
             this.cheatCameraEnabled = !this.cheatCameraEnabled;
+            this.lastFramePosition = this.m_mainCamera.transform.position;
         }
         // ...
     }
@@ -24,23 +25,23 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
 
     public void CheatCamera() {
         this.m_mainCamera.transform.position = this.lastFramePosition;
-        if (Input.GetKeyDown(KeyCode.PageUp)) {
-            this.m_mainCamera.transform.position += Vector3.right;
+        if (Input.GetKey(KeyCode.PageUp)) {
+            this.m_mainCamera.transform.position += Time.deltaTime * Vector3.right;
         }
-        if (Input.GetKeyDown(KeyCode.PageDown)) {
-            this.m_mainCamera.transform.position += Vector3.left;
+        if (Input.GetKey(KeyCode.PageDown)) {
+            this.m_mainCamera.transform.position += Time.deltaTime * Vector3.left;
         }
-        if (Input.GetKeyDown(KeyCode.Home)) {
-            this.m_mainCamera.transform.position += Vector3.up;
+        if (Input.GetKey(KeyCode.Home)) {
+            this.m_mainCamera.transform.position += Time.deltaTime * Vector3.up;
         }
-        if (Input.GetKeyDown(KeyCode.End)) {
-            this.m_mainCamera.transform.position += Vector3.down;
+        if (Input.GetKey(KeyCode.End)) {
+            this.m_mainCamera.transform.position += Time.deltaTime * Vector3.down;
         }
-        if (Input.GetKeyDown(KeyCode.Insert)) {
-            this.m_mainCamera.transform.position += Vector3.forward;
+        if (Input.GetKey(KeyCode.Insert)) {
+            this.m_mainCamera.transform.position += Time.deltaTime * Vector3.forward;
         }
-        if (Input.GetKeyDown(KeyCode.Delete)) {
-            this.m_mainCamera.transform.position += Vector3.back;
+        if (Input.GetKey(KeyCode.Delete)) {
+            this.m_mainCamera.transform.position += Time.deltaTime * Vector3.back;
         }
         this.lastFramePosition = this.m_mainCamera.transform.position;
     }
