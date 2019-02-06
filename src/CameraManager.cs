@@ -44,35 +44,35 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
         // Camera Translation
         camera.transform.position = this.lastFramePosition;
         float speedModifier = 1f;
-        if (Input.GetKey(KeyCode.H)) { // boost
+        if (Input.GetKey(KeyCode.RightControl)) { // boost
             speedModifier = 7f;
         }
-        if (Input.GetKey(KeyCode.I)) { // forwards
+        if (Input.GetKey(KeyCode.Home)) { // forwards
             Vector3 direction = camera.transform.forward;
             direction.Normalize();
             camera.transform.position += Time.deltaTime * speedModifier * direction;
         }
-        if (Input.GetKey(KeyCode.K)) { // backwards
+        if (Input.GetKey(KeyCode.End)) { // backwards
             Vector3 direction = camera.transform.forward;
             direction.Normalize();
             camera.transform.position -= Time.deltaTime * speedModifier * direction;
         }
-        if (Input.GetKey(KeyCode.J)) { // left
+        if (Input.GetKey(KeyCode.Delete)) { // left
             Vector3 direction = camera.transform.right;
             direction.Normalize();
             camera.transform.position -= Time.deltaTime * speedModifier * direction;
         }
-        if (Input.GetKey(KeyCode.L)) { // right
+        if (Input.GetKey(KeyCode.PageDown)) { // right
             Vector3 direction = camera.transform.right;
             direction.Normalize();
             camera.transform.position += Time.deltaTime * speedModifier * direction;
         }
-        if (Input.GetKey(KeyCode.U)) { // down
+        if (Input.GetKey(KeyCode.Insert)) { // down
             Vector3 direction = camera.transform.up;
             direction.Normalize();
             camera.transform.position -= Time.deltaTime * speedModifier * direction;
         }
-        if (Input.GetKey(KeyCode.O)) { // up
+        if (Input.GetKey(KeyCode.PageUp)) { // up
             Vector3 direction = camera.transform.up;
             direction.Normalize();
             camera.transform.position += Time.deltaTime * speedModifier * direction;
