@@ -12,6 +12,15 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
         if (Input.GetKeyDown(KeyCode.Numlock)) {
             this.cheatCameraEnabled = !this.cheatCameraEnabled;
             this.lastFramePosition = this.m_mainCamera.transform.position;
+            if (this.cheatCameraEnabled) {
+                this.cameraStartingPosition = this.m_mainCamera.transform.position;
+                this.cameraStartingRotation = this.m_mainCamera.transform.eulerAngles;
+                this.cameraXAngle = this.m_mainCamera.transform.eulerAngles.y;
+                this.cameraYAngle = this.m_mainCamera.transform.eulerAngles.x;
+            } else {
+                this.m_mainCamera.transform.position = this.cameraStartingPosition;
+                this.m_mainCamera.transform.eulerAngles = this.cameraStartingRotation;
+            }
         }
         // ...
     }
@@ -76,6 +85,8 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
 
     bool cheatCameraEnabled;
     Vector3 lastFramePosition;
+    Vector3 cameraStartingPosition;
+    Vector3 cameraStartingRotation;
     float cameraXAngle;
     float cameraYAngle;
     const float minCameraAngle = -50f;
