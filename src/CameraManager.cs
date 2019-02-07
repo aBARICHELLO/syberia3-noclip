@@ -10,16 +10,17 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Numlock)) {
-            this.cheatCameraEnabled = !this.cheatCameraEnabled;
-            this.lastFramePosition = this.m_mainCamera.transform.position;
-            if (this.cheatCameraEnabled) {
-                this.cameraStartingPosition = this.m_mainCamera.transform.position;
-                this.cameraStartingRotation = this.m_mainCamera.transform.eulerAngles;
-                this.cameraXAngle = this.m_mainCamera.transform.eulerAngles.y;
-                this.cameraYAngle = this.m_mainCamera.transform.eulerAngles.x;
+            cheatCameraEnabled = !cheatCameraEnabled;
+            lastFramePosition = m_mainCamera.transform.position;
+            if (cheatCameraEnabled) {
+                cameraStartingPosition = m_mainCamera.transform.position;
+                cameraStartingRotation = m_mainCamera.transform.eulerAngles;
+                cameraStartingFOV = m_mainCamera.fov;
+                cameraXAngle = m_mainCamera.transform.eulerAngles.y;
+                cameraYAngle = m_mainCamera.transform.eulerAngles.x;
             } else {
-                this.m_mainCamera.transform.position = this.cameraStartingPosition;
-                this.m_mainCamera.transform.eulerAngles = this.cameraStartingRotation;
+                m_mainCamera.transform.position = cameraStartingPosition;
+                m_mainCamera.transform.eulerAngles = cameraStartingRotation;
             }
         }
         // ...
@@ -27,25 +28,34 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
 
     void LateUpdate() {
         // ...
-        if (this.cheatCameraEnabled) {
-            this.CheatCamera();
+        if (cheatCameraEnabled) {
+            CheatCamera();
         }
     }
 
     public void CheatCamera() {
-        Camera camera = this.m_mainCamera;
+        Camera camera = m_mainCamera;
 
         // Camera Rotation
-        this.cameraXAngle += cameraSpeed * Input.GetAxis("Mouse X");
-        this.cameraYAngle -= cameraSpeed * Input.GetAxis("Mouse Y");
-        Mathf.Clamp(this.cameraYAngle, minCameraAngle, maxCameraAngle);
-        camera.transform.eulerAngles = new Vector3(this.cameraYAngle, this.cameraXAngle, 0f);
+        cameraXAngle += cameraSpeed * Input.GetAxis("Mouse X");
+        cameraYAngle -= cameraSpeed * Input.GetAxis("Mouse Y");
+        Mathf.Clamp(cameraYAngle, minCameraAngle, maxCameraAngle);
+        camera.transform.eulerAngles = new Vector3(cameraYAngle, cameraXAngle, 0f);
+
+        // Camera Field of View
+        if (Input.GetKey(KeyCode.KeypadMinus)) {
+            cameraStartingFOV -= changeRateFOV * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.KeypadPlus)) {
+            cameraStartingFOV += changeRateFOV * Time.deltaTime;
+        }
+        camera.fov = cameraStartingFOV;
 
         // Camera Translation
-        camera.transform.position = this.lastFramePosition;
+        camera.transform.position = lastFramePosition;
         float speedModifier = 1f;
         if (Input.GetKey(KeyCode.RightControl)) { // boost
-            speedModifier = 7f;
+            speedModifier = 11f;
         }
         if (Input.GetKey(KeyCode.Home)) { // forwards
             Vector3 direction = camera.transform.forward;
@@ -77,7 +87,7 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
             direction.Normalize();
             camera.transform.position += Time.deltaTime * speedModifier * direction;
         }
-        this.lastFramePosition = camera.transform.position;
+        lastFramePosition = camera.transform.position;
     }
 
     [HideInInspector]
@@ -87,9 +97,11 @@ public class CameraManager : BaseKoaUScriptEvent, IBackupHandler {
     Vector3 lastFramePosition;
     Vector3 cameraStartingPosition;
     Vector3 cameraStartingRotation;
+    float cameraStartingFOV;
     float cameraXAngle;
     float cameraYAngle;
     const float minCameraAngle = -50f;
     const float maxCameraAngle = 50f;
     const float cameraSpeed = 0.5f;
+    const float changeRateFOV = 7f;
 }
