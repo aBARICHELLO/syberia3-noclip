@@ -4,14 +4,12 @@ Modified DLL that uses Unity's API to move the camera.
 
 # Screenshots / Video
 Click the images below to watch a video demo.
-<!--
 <div>
-    <img src="https://i.imgur.com/So7J885.png" width="400"></a>
-    <img src="https://i.imgur.com/N51qRXq.png" width="400"></a>
+    <img src="https://i.imgur.com/iezn8tu.png" width="400"></a>
+    <img src="https://i.imgur.com/oqmiwKm.png" width="400"></a>
+    <img src="https://i.imgur.com/AjghvDL.png" width="400"></a>
+    <img src="https://i.imgur.com/TMre1Zb.png" width="400"></a>
 </div>
--->
-
-# Install
 
 # How to Install
 Download the DLL from the [releases tab](https://github.com/aBARICHELLO/syberia3-noclip/releases) and place it in the game's instalation folder<br>
