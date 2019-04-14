@@ -5,10 +5,10 @@ Modified DLL that uses Unity's API to move the camera.
 # Screenshots / Video
 Click the images below to watch a video demo.
 <div>
-    <img src="https://i.imgur.com/iezn8tu.png" width="400"></a>
-    <img src="https://i.imgur.com/oqmiwKm.png" width="400"></a>
-    <img src="https://i.imgur.com/AjghvDL.png" width="400"></a>
-    <img src="https://i.imgur.com/TMre1Zb.png" width="400"></a>
+    <a href="https://www.youtube.com/watch?v=0G_xXywy-DM"><img src="https://i.imgur.com/iezn8tu.png" width="400"></a>
+    <a href="https://www.youtube.com/watch?v=0G_xXywy-DM"><img src="https://i.imgur.com/oqmiwKm.png" width="400"></a>
+    <a href="https://www.youtube.com/watch?v=0G_xXywy-DM"><img src="https://i.imgur.com/AjghvDL.png" width="400"></a>
+    <a href="https://www.youtube.com/watch?v=0G_xXywy-DM"><img src="https://i.imgur.com/TMre1Zb.png" width="400"></a>
 </div>
 
 # How to Install
